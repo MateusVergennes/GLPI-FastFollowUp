@@ -55,6 +55,101 @@ button:hover {
     filter: brightness(.9);
 }
 
+body.with-sidebar {
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    background: #004dce;
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-right: var(--gap);
+    height: fit-content;
+}
+
+.sidebar h2 {
+    margin-bottom: 1rem;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin: .25rem 0;
+    padding: .25rem .5rem;
+    border-radius: var(--radius);
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: rgba(255, 255, 255, .15);
+}
+
+.content {
+    flex: 1;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    margin-bottom: var(--gap);
+}
+
+details.card>summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.info {
+    cursor: help;
+    font-style: normal;
+    margin-left: .3rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: .5rem;
+}
+
+thead th {
+    text-align: left;
+    font-size: .9rem;
+    color: var(--gray);
+    padding-bottom: .25rem;
+}
+
+td,
+th {
+    padding: .3rem .2rem;
+}
+
+tbody tr:nth-child(odd) {
+    background: #fafafa;
+}
+
+#old-list li,
+#new-list li {
+    margin: .25rem 0;
+}
+
+#old-list,
+#new-list {
+    padding-left: 1.25rem;
+}
+
+
+.new-icon {
+    margin-left: .35rem;
+    font-size: 1.1em;
+    cursor: help;
+}
+
 #groups {
     display: flex;
     flex-direction: column;

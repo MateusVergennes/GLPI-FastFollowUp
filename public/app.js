@@ -14,9 +14,7 @@ const submitAll = document.getElementById('submit-all');
 addGroupBtn.onclick = addGroup;
 submitAll.onclick = sendAll;
 
-addGroup();   // primeiro cartão
-
-/* ---------- funções ---------- */
+addGroup();   
 
 function addGroup() {
     const g = document.createElement('div');

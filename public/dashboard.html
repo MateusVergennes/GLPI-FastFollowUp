@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>GLPI – Painel de Progresso</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body class="with-sidebar">
+    <aside class="sidebar">
+        <h2>Menu</h2>
+        <nav>
+            <a href="index.html">Follow-ups em lote</a>
+            <a href="dashboard.html" class="active">Painel de Progresso</a>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <h1>Painel de Progresso</h1>
+
+        <details class="card" id="totals" open>
+            <summary>Resumo</summary>
+            <div id="totals-body"></div>
+        </details>
+
+        <details class="card" id="accordion-processed">
+            <summary>Tickets já comentados <span id="processed-count"></span></summary>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Criação</th>
+                        <th>SLA</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </details>
+
+        <details class="card" id="accordion-chart" close>
+            <summary>Aberturas nos últimos 14 dias</summary>
+            <canvas id="open-chart" height="120"></canvas>
+        </details>
+
+        <details class="card" id="suggestion" close>
+            <summary>Indicação de chamados p/ hoje</summary>
+
+            <div class="suggest-body">
+                <h3>10 mais antigos ainda não acompanhados</h3>
+                <ul id="old-list"></ul>
+
+                <h3>10 mais novos ainda não acompanhados</h3>
+                <ul id="new-list"></ul>
+            </div>
+        </details>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

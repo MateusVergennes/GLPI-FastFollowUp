@@ -7,14 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <h1>Registrar follow-ups em lote</h1>
+<body class="with-sidebar">
+    <aside class="sidebar">
+        <h2>Menu</h2>
+        <nav>
+            <a href="index.html" class="active">Follow-ups em lote</a>
+            <a href="dashboard.html">Painel de Progresso</a>
+        </nav>
+    </aside>
 
-    <button id="add-group" class="primary">+ Novo grupo</button>
+    <main class="content">
+        <h1>Registrar follow-ups em lote</h1>
 
-    <div id="groups"></div>
-
-    <button id="submit-all" class="success">Enviar tudo</button>
+        <button id="add-group" class="primary">+ Novo grupo</button>
+        <div id="groups"></div>
+        <button id="submit-all" class="success">Enviar tudo</button>
+    </main>
 
     <script src="app.js"></script>
 </body>
