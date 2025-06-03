@@ -10,6 +10,14 @@ e, opcionalmente, ajustar o SLA de vários chamados de uma só vez.
 ![image](https://github.com/user-attachments/assets/19c18877-be32-420a-b67e-0ae5c6c450e8)
 cadastramento de comentário em lotes, junto com inspeção do SLA
 
+![image](https://github.com/user-attachments/assets/eedf00e2-8e0a-4ba5-b8ed-a84b9c920276)
+Painel de Progresso
+
+![image](https://github.com/user-attachments/assets/8db133a1-bd03-44e5-94bf-cb93b3fc6a7b)
+Gráfico com quantidades de tickets
+
+![image](https://github.com/user-attachments/assets/a75aee3a-b8b4-4ce3-bcb9-42541958b050)
+Indicação de comentários de novos e antigos com tag de abertos nos últimos 3 dias
 
 ## Funcionalidades
 - Vários grupos de chamados → responsável → comentário em um único envio.
