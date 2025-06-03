@@ -1,11 +1,14 @@
 :root {
-    --bg: #f5f7fa;
+    --topbar-bg: #e3d7ba;
+    --accent: #8a6a3c;
+    --text-dark: #4d3920;
+    --bg       : #ebebeb;
     --card: #fff;
-    --accent: #0066ff;
     --gray: #666;
     --radius: 8px;
     --shadow: 0 2px 5px rgba(0, 0, 0, .07);
     --gap: 1rem;
+    --topbar-h: 56px;
     font-size: 16px;
 }
 
@@ -13,19 +16,56 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: sans-serif
 }
 
 body {
     background: var(--bg);
-    padding: 2rem;
+    padding: calc(var(--topbar-h) + 1.5rem) 2rem 2rem;
+    color: var(--text-dark);
 }
 
+/* ---------- barra superior ---------- */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--topbar-h);
+    background: var(--topbar-bg);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+}
+
+.topbar nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.topbar a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    padding: .4rem .75rem;
+    border-radius: var(--radius);
+    transition: .2s;
+}
+
+.topbar a.active,
+.topbar a:hover {
+    background: rgba(0, 0, 0, .07);
+}
+
+/* ---------- tipografia ---------- */
 h1 {
     margin-bottom: 1.5rem;
     color: var(--accent);
 }
 
+/* ---------- botões ---------- */
 button {
     padding: .5rem 1rem;
     border: none;
@@ -37,60 +77,25 @@ button {
 
 button.primary {
     background: var(--accent);
-    color: #fff;
+    color: #fff
 }
 
 button.success {
     background: #38b000;
     color: #fff;
-    margin-top: var(--gap);
+    margin-top: var(--gap)
 }
 
 button.danger {
     background: #e63946;
-    color: #fff;
+    color: #fff
 }
 
 button:hover {
-    filter: brightness(.9);
+    filter: brightness(.9)
 }
 
-body.with-sidebar {
-    display: flex;
-}
-
-.sidebar {
-    width: 220px;
-    background: #004dce;
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 1rem;
-    margin-right: var(--gap);
-    height: fit-content;
-}
-
-.sidebar h2 {
-    margin-bottom: 1rem;
-}
-
-.sidebar a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    margin: .25rem 0;
-    padding: .25rem .5rem;
-    border-radius: var(--radius);
-}
-
-.sidebar a.active,
-.sidebar a:hover {
-    background: rgba(255, 255, 255, .15);
-}
-
-.content {
-    flex: 1;
-}
-
+/* ---------- cards & acordeões ---------- */
 .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -102,58 +107,62 @@ body.with-sidebar {
 details.card>summary {
     cursor: pointer;
     font-weight: 600;
-    margin-bottom: .5rem;
+    margin-bottom: .5rem
 }
 
+/* ---------- tooltip / ícone novo ---------- */
 .info {
     cursor: help;
     font-style: normal;
-    margin-left: .3rem;
+    margin-left: .3rem
 }
 
+.new-icon {
+    margin-left: .35rem;
+    font-size: 1.3em;
+    cursor: help;
+    line-height: 1
+}
+
+/* ---------- tabelas ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: .5rem;
+    margin-top: .5rem
 }
 
 thead th {
     text-align: left;
     font-size: .9rem;
     color: var(--gray);
-    padding-bottom: .25rem;
+    padding-bottom: .25rem
 }
 
 td,
 th {
-    padding: .3rem .2rem;
+    padding: .3rem .2rem
 }
 
 tbody tr:nth-child(odd) {
-    background: #fafafa;
+    background: #fafafa
+}
+
+/* ---------- listas ---------- */
+#old-list,
+#new-list {
+    padding-left: 1.25rem
 }
 
 #old-list li,
 #new-list li {
-    margin: .25rem 0;
+    margin: .25rem 0
 }
 
-#old-list,
-#new-list {
-    padding-left: 1.25rem;
-}
-
-
-.new-icon {
-    margin-left: .35rem;
-    font-size: 1.1em;
-    cursor: help;
-}
-
+/* ---------- elementos da página de follow-ups ---------- */
 #groups {
     display: flex;
     flex-direction: column;
-    gap: var(--gap);
+    gap: var(--gap)
 }
 
 .group {
@@ -172,37 +181,37 @@ tbody tr:nth-child(odd) {
     min-width: 220px;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: .5rem
 }
 
 .group h2 {
     font-size: 1rem;
-    color: var(--gray);
+    color: var(--gray)
 }
 
 .ticket-row {
     display: flex;
-    gap: .5rem;
+    gap: .5rem
 }
 
 .ticket-row input {
     flex: 1;
     padding: .3rem .5rem;
     border: 1px solid #ccc;
-    border-radius: var(--radius);
+    border-radius: var(--radius)
 }
 
 textarea {
     resize: vertical;
     padding: .5rem;
     border: 1px solid #ccc;
-    border-radius: var(--radius);
+    border-radius: var(--radius)
 }
 
-input[type="date"] {
+input[type=date] {
     padding: .3rem .5rem;
     border: 1px solid #ccc;
-    border-radius: var(--radius);
+    border-radius: var(--radius)
 }
 
 .remove-group {

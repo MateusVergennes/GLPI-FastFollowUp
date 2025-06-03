@@ -5,8 +5,14 @@ const WEEKDAY_CO = '#004dce';   // azul D1
 const WEEKEND_CO = '#ffa500';   // laranja
 const THREE_D_MS = 3 * 24 * 60 * 60 * 1000;
 
-const fmtDate = d => d.toLocaleDateString('pt-BR');
+/* ---------- flags de configuração ---------- */
+/* true  ⇒ só conta dias úteis (seg-sex)
+   false ⇒ conta todos os dias do calendário                  */
+const COUNT_BUSINESS_DAYS = true;
 
+const SHOW_ESTIMATE_FIELDS = true;
+
+const fmtDate = d => d.toLocaleDateString('pt-BR');
 function ticketLink(id, label) {
     const a = document.createElement('a');
     a.href = GLPI_URL + id;
@@ -14,9 +20,20 @@ function ticketLink(id, label) {
     a.textContent = label;
     return a;
 }
-
 function isRecent(dateStr) {
     return (Date.now() - new Date(dateStr).getTime()) <= THREE_D_MS;
+}
+
+/* ---------- avança N dias, opcionalmente pulando fins-de-semana ---------- */
+function addDays(start, n, businessOnly = false) {
+    const d = new Date(start);
+    while (n > 0) {
+        d.setDate(d.getDate() + 1);
+        if (!businessOnly || (d.getDay() !== 0 && d.getDay() !== 6)) {
+            n--;
+        }
+    }
+    return d;
 }
 
 /* ---------- carregamento principal ---------- */
@@ -25,25 +42,42 @@ function isRecent(dateStr) {
         const res = await fetch('/stats');
         const stats = await res.json();
 
-        /* === Resumo (sem alterações) === */
-        const totals = document.getElementById('totals-body');
+        /* === Resumo === */
+        const today = new Date(); today.setHours(0, 0, 0, 0);
         const influxTxt = stats.daysWithInflux === null ? '∞' : stats.daysWithInflux;
+        const finishFixed = addDays(today, stats.daysFixedCap, COUNT_BUSINESS_DAYS);
+        const finishInflux = stats.daysWithInflux === null
+            ? null
+            : addDays(today, stats.daysWithInflux, COUNT_BUSINESS_DAYS);
+
+        const totals = document.getElementById('totals-body');
+        let estimateHtml = '';
+        if (SHOW_ESTIMATE_FIELDS) {
+            estimateHtml = `
+        <p>
+          <strong>Dias p/ zerar (capacidade fixa):</strong>
+          ${stats.daysFixedCap} (${fmtDate(finishFixed)})
+          <span class="info"
+                title="dias = ceil(pendentes ÷ ${DAILY_CAP})">ℹ️</span>
+        </p>
+
+        <p>
+          <strong>Dias p/ zerar (média ${stats.avgOpened.toFixed(1)} aberturas/dia):</strong>
+          ${stats.daysWithInflux === null
+                    ? '∞'
+                    : `${stats.daysWithInflux} (${fmtDate(finishInflux)})`}
+          <span class="info"
+                title="dias = ceil(pendentes ÷ (${DAILY_CAP} − média_14d))\n(se saldo ≤ 0 ⇒ infinito)">ℹ️</span>
+        </p>`;
+        }
+
         totals.innerHTML = `
       <p><strong>Tickets já comentados:</strong> ${stats.processedCount}</p>
       <p><strong>Abertos sem comentário:</strong> ${stats.remainingCount}</p>
-      <p>
-        <strong>Dias p/ zerar (capacidade fixa):</strong> ${stats.daysFixedCap}
-        <span class="info" title="dias = ceil(pendentes ÷ ${DAILY_CAP})">ℹ️</span>
-      </p>
-      <p>
-        <strong>Dias p/ zerar (média ${stats.avgOpened.toFixed(1)} aberturas/dia):</strong>
-        ${influxTxt}
-        <span class="info"
-              title="dias = ceil(pendentes ÷ (${DAILY_CAP} − média_14d))\n(se saldo ≤ 0 ⇒ infinito)">ℹ️</span>
-      </p>
+      ${estimateHtml}
     `;
 
-        /* === Tickets comentados (sem alterações) === */
+        /* === Tickets comentados === */
         document.getElementById('processed-count').textContent =
             `(${stats.processedCount})`;
         const tbody = document.querySelector('#accordion-processed tbody');
@@ -62,7 +96,6 @@ function isRecent(dateStr) {
         });
 
         /* === Gráfico de aberturas (linha) === */
-        const today = new Date(); today.setHours(0, 0, 0, 0);
         const labels = [];
         const data = [];
         const ptColors = [];

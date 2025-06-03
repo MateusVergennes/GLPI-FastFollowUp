@@ -4,19 +4,18 @@
 <head>
     <meta charset="utf-8">
     <title>GLPI – Painel de Progresso</title>
-
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 
-<body class="with-sidebar">
-    <aside class="sidebar">
-        <h2>Menu</h2>
+<body>
+    <!-- barra de navegação fixa -->
+    <header class="topbar">
         <nav>
             <a href="index.html">Follow-ups em lote</a>
             <a href="dashboard.html" class="active">Painel de Progresso</a>
         </nav>
-    </aside>
+    </header>
 
     <main class="content">
         <h1>Painel de Progresso</h1>
@@ -41,21 +40,19 @@
             </table>
         </details>
 
-        <details class="card" id="accordion-chart" close>
+        <details class="card" id="accordion-chart">
             <summary>Aberturas nos últimos 14 dias</summary>
             <canvas id="open-chart" height="120"></canvas>
         </details>
 
-        <details class="card" id="suggestion" close>
+        <details class="card" id="suggestion">
             <summary>Indicação de chamados p/ hoje</summary>
 
-            <div class="suggest-body">
-                <h3>10 mais antigos ainda não acompanhados</h3>
-                <ul id="old-list"></ul>
+            <h3>10 mais antigos ainda não acompanhados</h3>
+            <ul id="old-list"></ul>
 
-                <h3>10 mais novos ainda não acompanhados</h3>
-                <ul id="new-list"></ul>
-            </div>
+            <h3>10 mais novos ainda não acompanhados</h3>
+            <ul id="new-list"></ul>
         </details>
     </main>
 
