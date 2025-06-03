@@ -3,6 +3,14 @@
 Ferramenta web simples para registrar *follow-ups* em lote no GLPI
 e, opcionalmente, ajustar o SLA de vários chamados de uma só vez.
 
+## Prints da funcionalidade:
+![image](https://github.com/user-attachments/assets/a8fc898a-bf02-45df-8504-9f72f14ed82e)
+(cadastra os comentários no GLPI que deseja realizar em lote)
+
+![image](https://github.com/user-attachments/assets/19c18877-be32-420a-b67e-0ae5c6c450e8)
+cadastramento de comentário em lotes, junto com inspeção do SLA
+
+
 ## Funcionalidades
 - Vários grupos de chamados → responsável → comentário em um único envio.
 - Ajuste opcional do **time_to_resolve** (SLA) quando o chamado estiver atrasado.
